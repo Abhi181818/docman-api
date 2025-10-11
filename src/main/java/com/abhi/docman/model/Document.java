@@ -1,6 +1,7 @@
 package com.abhi.docman.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,7 +22,7 @@ import lombok.Data;
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
     
     @Column(nullable = false)
     private String fileName;
