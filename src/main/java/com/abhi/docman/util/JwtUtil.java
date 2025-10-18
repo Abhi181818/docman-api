@@ -19,11 +19,11 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret:mySecretKey}")
+    @Value("${jwt.secret:1234}")
     private String secret;
 
     @Value("${jwt.expiration:86400000}")
-    private long expiration; // 24 hours in milliseconds
+    private long expiration; 
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
