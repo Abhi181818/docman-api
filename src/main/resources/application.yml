@@ -17,7 +17,7 @@ spring:
 #            password: admin123
 
 minio:
-    url: http://localhost:9000
+    url: http://localhost:9002
     access-key: minioadmin
     secret-key: minioadmin
     bucket-name: documents

@@ -1,6 +1,6 @@
 package com.abhi.docman.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,11 +9,20 @@ import io.minio.MinioClient;
 @Configuration
 public class MinioConfig {
 
+    @Value("${MINIO_URL:http://localhost:9002}")
+    private String minioUrl;
+
+    @Value("${MINIO_ACCESS_KEY:minioadmin}")
+    private String accessKey;
+
+    @Value("${MINIO_SECRET_KEY:minioadmin}")
+    private String secretKey;
+
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()
-                .endpoint("http://localhost:9002")
-                .credentials("minioadmin", "minioadmin")
+                .endpoint(minioUrl)
+                .credentials(accessKey, secretKey)
                 .build();
     }
     
