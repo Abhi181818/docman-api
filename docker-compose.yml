@@ -3,8 +3,8 @@ services:
   minio:
     image: minio/minio
     ports:
-      - "9000:9000"
       - "9001:9001"
+      - "9002:9002"
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
@@ -12,17 +12,17 @@ services:
     volumes:
       - minio_data:/data
 
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_DATABASE: doctracker
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
+  # mysql:
+  #   image: mysql:8
+  #   environment:
+  #     MYSQL_DATABASE: doctracker
+  #     MYSQL_USER: root
+  #     MYSQL_PASSWORD: password
+  #     MYSQL_ROOT_PASSWORD: password
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
 
   app:
     build: .
@@ -31,14 +31,14 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/doctracker
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_PASSWORD: 1234
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
     depends_on:
       - minio
-      - mysql
+      # - mysql
 
 volumes:
   minio_data:
-  mysql_data:
+  # mysql_data:

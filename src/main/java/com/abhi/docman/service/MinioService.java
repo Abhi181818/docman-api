@@ -19,13 +19,13 @@ public class MinioService {
 
     private final String bucketName = "documents";
 
-    @PostConstruct
-    public void init() throws Exception {
-        boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
-        if (!found) {
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-        }
-    }
+//    @PostConstruct
+//    public void init() throws Exception {
+//        boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+//        if (!found) {
+//            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+//        }
+//    }
 
     public String uploadFile(MultipartFile file, String trackId) {
         String fName = trackId + "_" + file.getOriginalFilename();

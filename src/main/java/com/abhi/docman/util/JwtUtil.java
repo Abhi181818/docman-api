@@ -16,6 +16,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 @Component
 public class JwtUtil {
 
@@ -76,7 +80,22 @@ public class JwtUtil {
     }
 
     private SecretKey getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
-        return Keys.hmacShaKeyFor(keyBytes);
+        try {
+            byte[] keyBytes;
+            try {
+                keyBytes = Decoders.BASE64.decode(secret);
+            } catch (IllegalArgumentException e) {
+                keyBytes = secret.getBytes(StandardCharsets.UTF_8);
+            }
+
+            if (keyBytes.length < 32) {
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                keyBytes = md.digest(keyBytes);
+            }
+
+            return Keys.hmacShaKeyFor(keyBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Unable to initialize JWT signing key", e);
+        }
     }
 }

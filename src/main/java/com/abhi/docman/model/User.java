@@ -36,7 +36,3 @@ public class User {
     private LocalDateTime createdAt;
 
 }
-
-enum UserRole {
-    ADMIN, USER
-}
