@@ -12,4 +12,6 @@ public interface DocumentRepo extends JpaRepository<Document,UUID> {
 
     List<Document> findByOwner(User user);
 
+    Document findByTrackingId(String trackingId);
+
 }

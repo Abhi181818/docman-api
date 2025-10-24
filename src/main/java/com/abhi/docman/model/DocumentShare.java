@@ -26,9 +26,7 @@ public class DocumentShare {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id", nullable = false)
     private Document document;
-    
-    private String shareToken;
-    
+
     @CreationTimestamp
     private LocalDateTime createdAt;
     

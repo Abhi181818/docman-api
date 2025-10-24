@@ -45,7 +45,3 @@ public class DocumentAccessLog {
     private LocalDateTime accessedAt;
     
 }
-
-enum AccessType {
-    VIEW, DOWNLOAD, PREVIEW
-}

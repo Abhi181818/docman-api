@@ -8,6 +8,7 @@ import com.abhi.docman.model.Document;
 import com.abhi.docman.model.User;
 import com.abhi.docman.repo.DocumentRepo;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -40,6 +41,7 @@ public class DocumentService {
     public List<Document> getAllDocumentsForUser(User user) {
         return documentRepository.findByOwner(user);
     }
+
 
     public byte[] getFileData(String fileName) {
         return minioService.getFile(fileName);
